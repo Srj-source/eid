@@ -1,417 +1,969 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ramadan Mubarak - Image Gallery</title>
 
-<!DOCTYPE html>  <html lang="en">  
-<head>  
-    <meta charset="UTF-8">  
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
-    <title>Ramadan Mubarak - Image Gallery</title>  
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Amiri&family=Poppins:wght@300;400;600&display=swap"
+    rel="stylesheet"
+  />
 
-   <link href="https://fonts.googleapis.com/css2?family=Amiri&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-            <link href="Emoji animation.css" rel="stylesheet">
-           <link href="heart floatUp.css" rel="stylesheet">
-    <style>/* General Styles */  
-body {  
-    font-family: 'Poppins', sans-serif;  
-      
-    transition: background 1s ease-in-out;  
-  
-    color: #fff;  
-    margin: 0;  
-    padding: 0;  
-    overflow-x: hidden;  
-}  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
-  /* Header */
-header {
-    background: linear-gradient(135deg, #1f2a44, #2e3b5e);
-    color: #ffd700;
-    padding: 40px 0;
-    text-align: center;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-    position: relative;
-    animation: fadeInDown 1.5s ease;
-    overflow: hidden;
-}
-        @media (min-width: 667px) { /* Tablets and Larger Screens */
-    header {
-        background: url('hero.jpg') no-repeat center center;
-        background-size: cover;
-        padding: 100px 20px; /* Increase padding for hero effect */}}
-
-/* Star Styling */
-.star {
-    position: absolute;
-    font-size: 18px;
-    color: #ffd700; /* Gold color */
-    cursor: pointer;
-    animation: twinkle 2s infinite alternate;
-    transition: transform 0.3s ease-in-out;
-}
-
-/* Twinkling Effect */
-@keyframes twinkle {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.5; transform: scale(1.2); }
-}
-
-
-
-.star:hover {
-    transform: scale(1.2);
-}
-
-  
-header h1 {  
-    font-family: 'Amiri', serif;  
-    font-size: 4em;  
-    text-shadow: 3px 3px 10px rgba(255, 215, 0, 0.8);  
-}  
-  
-header p {  
-    font-size: 1.5em;  
-    text-shadow: 1px 1px 5px rgba(255, 215, 0, 0.6);  
-}  
-  
-header::before {  
-    content: "🌙";  
-    font-size: 100px;  
-    position: absolute;  
-    top: -20px;  
-    left: 10%;  
-    animation: moonGlow 2s infinite alternate;  
-}  
-  
-@keyframes moonGlow {  
-    from { opacity: 0.7; transform: scale(1); }  
-    to { opacity: 1; transform: scale(1.1); }  
-}  
-  
-/* Gallery */  
-.gallery {  
-    display: flex;  
-    flex-wrap: wrap;  
-    justify-content: center;  
-    padding: 20px;  
-    gap: 15px;  
-}  
-  
-.image-container {  
-    position: relative;  
-    width: 200px;  
-    height: 200px;  
-    overflow: hidden;  
-    border-radius: 15px;  
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);  
-    transition: transform 0.3s ease, box-shadow 0.3s ease;  
-    cursor: pointer;  
-}  
-  
-.image-container:hover {  
-    transform: scale(1.1);  
-    box-shadow: 0 0 20px rgba(255, 215, 0, 0.7);  
-}  
-  
-.image-container img {  
-    width: 100%;  
-    height: 100%;  
-    object-fit: cover;  
-    transition: transform 0.3s ease;  
-}  
-
-/* Lightbox */  
-.lightbox {  
-    display: none;  
-    position: fixed;  
-    z-index: 1000;  
-    padding-top: 60px;  
-    left: 0;  
-    top: 0;  
-    width: 100%;  
-    height: 100%;  
-    background: rgba(0, 0, 0, 0.8) url('ramadan-pattern.png') center/cover;  
-    text-align: center;  
-}  
-  @keyframes glowHeart {
-    0% { box-shadow: 0 0 5px red; }
-    50% { box-shadow: 0 0 20px pink; }
-    100% { box-shadow: 0 0 5px red; }
-}
-
-
-.lightbox-content {  
-    margin: auto;  
-    display: block;  
-    max-width: 90%;  
-    max-height: 80vh;  
-    border-radius: 10px;  
-    animation: zoomIn 0.3s ease;  
-}  
-  /* Animated Glowing Boundary for Lightbox Image */
-.lightbox-content {
-    animation: glowHeart 2s infinite alternate, zoomIn 0.3s ease;
-    border-radius: 15px;
-    border: 10px solid transparent; /* Transparent initial border */
-    background: linear-gradient(45deg, #ffd700, #ff6b6b, #8b5cf6, #00d4ff);
-    background-clip: padding-box;
-    box-shadow: 0 0 20px rgba(255, 215, 0, 0.7);
-    position: relative;
-}
-
-/* Add a Shimmering Effect to the Border */
-.lightbox-content::before {
-    content: "";
-    position: absolute;
-    top: -12px;
-    left: -12px;
-    right: -12px;
-    bottom: -12px;
-    border-radius: 20px;
-    background: linear-gradient(45deg, #ffd700, #ff6b6b, #8b5cf6, #00d4ff);
-    background-size: 300% 300%;
-    animation: shimmer 6s infinite linear;
-    z-index: -1;
-}
-
-/* Shimmer Animation */
-@keyframes shimmer {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-
-/* Glowing Animation */
-@keyframes glowHeart {
-    0% { box-shadow: 0 0 10px rgba(255, 215, 0, 0.7); }
-    50% { box-shadow: 0 0 20px rgba(255, 107, 107, 0.7); }
-    100% { box-shadow: 0 0 10px rgba(0, 212, 255, 0.7); }
+  <style>
+    :root {
+      --bg1: #111827;
+      --bg2: #1f2a44;
+      --bg3: #2e3b5e;
+      --gold: #ffd700;
+      --text: #ffffff;
+      --card: rgba(255, 255, 255, 0.08);
+      --shadow: 0 10px 30px rgba(0, 0, 0, 0.28);
     }
-.close {  
-    position: absolute;  
-    top: 20px;  
-    right: 35px;  
-    color: #fff;  
-    font-size: 40px;  
-    font-weight: bold;  
-    cursor: pointer;  
-    transition: color 0.3s ease;  
-}  
-  
-.close:hover {  
-    color: #e74c3c;  
-}  
-  
-.caption {  
-    color: #fff;  
-    font-size: 1.2em;  
-    margin-top: 10px;  
-}  
-  
-/* Footer */  
-footer {  
-    background: linear-gradient(135deg, #2c3e50, #34495e);  
-    color: #ffd700;  
-    text-align: center;  
-    padding: 15px 0;  
-    box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.3);  
-    font-size: 1.2em;  
-    text-shadow: 2px 2px 10px rgba(255, 215, 0, 0.7);  
-}  
-  
-  
-  
-/* Animations */  
-@keyframes fadeInDown {  
-    from { opacity: 0; transform: translateY(-20px); }  
-    to { opacity: 1; transform: translateY(0); }  
-}  
-  
-@keyframes zoomIn {  
-    from { transform: scale(0.8); }  
-    to { transform: scale(1); }  
-}</style>
-    </head>  
-<body> 
-     
-    <header>
 
-    <h1>Ramadan Mubarak</h1>  
-    <p>Blessed Month of Fasting, Prayer, and Reflection</p>  
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Poppins", sans-serif;
+      color: var(--text);
+      background: linear-gradient(135deg, var(--bg1), var(--bg2), var(--bg3));
+      min-height: 100vh;
+      overflow-x: hidden;
+      transition: background 1s ease-in-out;
+    }
+
+    body.loaded > *:not(#gsap-loader) {
+      opacity: 1;
+    }
+
+    body > *:not(#gsap-loader) {
+      opacity: 0;
+      transition: opacity 0.8s ease;
+    }
+
+    /* Loader */
+    #gsap-loader {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #1f2a44, #2e3b5e);
+    }
+
+    .loader-content {
+      text-align: center;
+      color: var(--gold);
+      padding: 24px;
+    }
+
+    .loader-logo {
+      font-size: 4rem;
+      margin-bottom: 16px;
+      text-shadow: 0 0 14px rgba(255, 215, 0, 0.65);
+    }
+
+    .loader-text {
+      font-family: "Amiri", serif;
+      font-size: 2rem;
+      margin-bottom: 24px;
+      text-shadow: 0 0 8px rgba(255, 215, 0, 0.45);
+    }
+
+    .loader-animation {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 22px;
+    }
+
+    .loader-dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--gold);
+      box-shadow: 0 0 10px rgba(255, 215, 0, 0.7);
+    }
+
+    .loader-progress {
+      width: min(260px, 80vw);
+      height: 8px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.18);
+      overflow: hidden;
+      margin: 0 auto;
+    }
+
+    .loader-progress-bar {
+      width: 0%;
+      height: 100%;
+      background: var(--gold);
+      box-shadow: 0 0 10px rgba(255, 215, 0, 0.7);
+    }
+
+    .loader-message {
+      margin-top: 16px;
+      font-size: 0.95rem;
+      color: rgba(255, 255, 255, 0.82);
+    }
+
+    /* Header */
+    header {
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+      padding: 90px 20px 60px;
+      background:
+        radial-gradient(circle at top right, rgba(255, 215, 0, 0.12), transparent 30%),
+        linear-gradient(135deg, rgba(31, 42, 68, 0.94), rgba(46, 59, 94, 0.92));
+      box-shadow: var(--shadow);
+    }
+
+    header::before {
+      content: "🌙";
+      position: absolute;
+      top: 14px;
+      left: 8%;
+      font-size: 4.5rem;
+      animation: moonGlow 2s infinite alternate ease-in-out;
+      pointer-events: none;
+    }
+
+    @keyframes moonGlow {
+      from {
+        opacity: 0.7;
+        transform: scale(1);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1.08);
+      }
+    }
+
+    header h1 {
+      margin: 0;
+      font-family: "Amiri", serif;
+      font-size: clamp(2.4rem, 7vw, 4.4rem);
+      color: var(--gold);
+      text-shadow: 2px 2px 14px rgba(255, 215, 0, 0.4);
+    }
+
+    header p {
+      margin: 12px auto 0;
+      max-width: 760px;
+      font-size: clamp(1rem, 2.6vw, 1.35rem);
+      color: #f8f4d6;
+      text-shadow: 1px 1px 4px rgba(255, 215, 0, 0.25);
+    }
+
+    #stars-container {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .star {
+      position: absolute;
+      font-size: 1.1rem;
+      color: var(--gold);
+      animation: twinkle 2s infinite alternate ease-in-out;
+      cursor: pointer;
+      pointer-events: auto;
+      user-select: none;
+      filter: drop-shadow(0 0 6px rgba(255, 215, 0, 0.55));
+    }
+
+    @keyframes twinkle {
+      0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+      50% {
+        opacity: 0.55;
+        transform: scale(1.18);
+      }
+    }
+
+    /* Top message card */
+    .message-wrap {
+      padding: 22px 16px 6px;
+    }
+
+    #love-message {
+      max-width: 900px;
+      margin: 0 auto;
+      background: var(--card);
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #fff7cc;
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      padding: 16px 18px;
+      text-align: center;
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    .controls {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      padding: 16px;
+    }
+
+    .btn {
+      border: none;
+      border-radius: 999px;
+      padding: 12px 18px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      background: var(--gold);
+      color: #162032;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      opacity: 0.95;
+    }
+
+    /* Gallery */
+    .gallery {
+      width: min(1200px, calc(100% - 24px));
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 16px;
+      padding: 14px 0 30px;
+    }
+
+    .image-container {
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 1 / 1;
+      border-radius: 18px;
+      cursor: pointer;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: var(--shadow);
+      transition: transform 0.28s ease, box-shadow 0.28s ease;
+    }
+
+    .image-container:hover {
+      transform: translateY(-4px) scale(1.02);
+      box-shadow: 0 0 24px rgba(255, 215, 0, 0.28);
+    }
+
+    .image-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.35s ease;
+    }
+
+    .image-container:hover img {
+      transform: scale(1.06);
+    }
+
+    .image-label {
+      position: absolute;
+      left: 10px;
+      right: 10px;
+      bottom: 10px;
+      padding: 8px 10px;
+      border-radius: 12px;
+      font-size: 0.85rem;
+      background: rgba(0, 0, 0, 0.45);
+      backdrop-filter: blur(4px);
+      color: #fff;
+      text-align: center;
+    }
+
+    /* Lightbox */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      padding: 22px;
+      background: rgba(0, 0, 0, 0.88);
+    }
+
+    .lightbox.show {
+      display: flex;
+      animation: fadeIn 0.25s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .lightbox-frame {
+      position: relative;
+      max-width: min(92vw, 980px);
+      max-height: 82vh;
+      padding: 10px;
+      border-radius: 22px;
+      background: linear-gradient(45deg, #ffd700, #ff6b6b, #8b5cf6, #00d4ff);
+      background-size: 300% 300%;
+      animation: shimmer 6s linear infinite;
+      box-shadow: 0 0 28px rgba(255, 215, 0, 0.35);
+    }
+
+    @keyframes shimmer {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .lightbox-content {
+      display: block;
+      max-width: min(90vw, 960px);
+      max-height: 78vh;
+      width: auto;
+      height: auto;
+      border-radius: 14px;
+      background: #111;
+      animation: zoomIn 0.25s ease;
+    }
+
+    @keyframes zoomIn {
+      from {
+        transform: scale(0.94);
+        opacity: 0.8;
+      }
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    .close,
+    .nav-btn {
+      position: absolute;
+      border: none;
+      cursor: pointer;
+      color: white;
+      background: rgba(255, 255, 255, 0.14);
+      backdrop-filter: blur(5px);
+      border-radius: 999px;
+    }
+
+    .close {
+      top: 18px;
+      right: 18px;
+      width: 46px;
+      height: 46px;
+      font-size: 1.8rem;
+      line-height: 1;
+    }
+
+    .nav-btn {
+      top: 50%;
+      transform: translateY(-50%);
+      width: 48px;
+      height: 48px;
+      font-size: 1.5rem;
+    }
+
+    .nav-prev {
+      left: 16px;
+    }
+
+    .nav-next {
+      right: 16px;
+    }
+
+    .caption {
+      margin-top: 14px;
+      text-align: center;
+      color: #fff;
+      font-size: 1rem;
+      max-width: 90vw;
+    }
+
+    /* Floating emojis and hearts */
+    .emoji,
+    .heart {
+      position: fixed;
+      pointer-events: none;
+      z-index: 1200;
+      user-select: none;
+      will-change: transform, opacity;
+    }
+
+    .emoji {
+      font-size: 1.6rem;
+      animation: floatEmoji 1.8s ease-out forwards;
+    }
+
+    .heart {
+      bottom: -20px;
+      font-size: 1.4rem;
+      animation: floatHeart 3s linear forwards;
+    }
+
+    @keyframes floatEmoji {
+      0% {
+        transform: translateY(0) scale(0.8);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-140px) scale(1.2);
+        opacity: 0;
+      }
+    }
+
+    @keyframes floatHeart {
+      0% {
+        transform: translateY(0) scale(1);
+        opacity: 0.95;
+      }
+      100% {
+        transform: translateY(-105vh) scale(1.25);
+        opacity: 0;
+      }
+    }
+
+    /* Toast */
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 20px;
+      transform: translateX(-50%);
+      background: rgba(0, 0, 0, 0.78);
+      color: #fff;
+      padding: 12px 16px;
+      border-radius: 12px;
+      z-index: 2000;
+      font-size: 0.95rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(-4px);
+    }
+
+    footer {
+      margin-top: 8px;
+      text-align: center;
+      padding: 18px 12px 28px;
+      color: #f3dd83;
+      background: linear-gradient(135deg, #243244, #1b2737);
+      box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.22);
+      font-size: 1rem;
+    }
+
+    @media (max-width: 640px) {
+      header {
+        padding-top: 80px;
+      }
+
+      .nav-btn {
+        width: 42px;
+        height: 42px;
+      }
+
+      .close {
+        width: 42px;
+        height: 42px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Loader -->
+  <div id="gsap-loader">
+    <div class="loader-content">
+      <div class="loader-logo">🌙</div>
+      <div class="loader-text">Ramadan Mubarak</div>
+
+      <div class="loader-animation">
+        <div class="loader-dot"></div>
+        <div class="loader-dot"></div>
+        <div class="loader-dot"></div>
+        <div class="loader-dot"></div>
+        <div class="loader-dot"></div>
+      </div>
+
+      <div class="loader-progress">
+        <div class="loader-progress-bar"></div>
+      </div>
+
+      <div class="loader-message">Loading blessings...</div>
+    </div>
+  </div>
+
+  <header>
+    <h1>Ramadan Mubarak</h1>
+    <p>Blessed month of fasting, prayer, kindness, and reflection.</p>
     <div id="stars-container"></div>
-</header>  
-<div id="love-message" style="color:blue"></div>
-  
-<div class="gallery">
-      
-    <!-- Add your images here -->  
-   <div class="image-container" data-src="A1.jpg">
-        <img src="A1.jpg" alt="Day1">  
-    </div>  
-    <div class="image-container" data-src="A2.jpg">  
-        <img src="A2.jpg" alt="Day2">  
-    </div>  
-    <div class="image-container" data-src="A3.jpg">  
-        <img src="A3.jpg" alt="Day3">  
-    </div>  
-    <div class="image-container" data-src="A4.jpg">  
-        <img src="A4.jpg" alt="Day4">  
-    </div>  
-    <div class="image-container" data-src="A5.jpg">  
-        <img src="A5.jpg" alt="Day5">  
-    </div>  
-    <div class="image-container" data-src="A6.jpg">  
-        <img src="A6.jpg" alt="Day6">  
-    </div>  
-    <div class="image-container" data-src="A7.jpg">  
-        <img src="A7.jpg" alt="Day7">  
-    </div>  
-    <div class="image-container" data-src="A8.jpg">  
-        <img src="A8.jpg" alt="Day8">  
-    </div>  
-    <div class="image-container" data-src="A9.jpg">  
-        <img src="A9.jpg" alt="Day9">  
-    </div>  
-    <div class="image-container" data-src="A10.jpg">  
-        <img src="A10.jpg" alt="Day10">  
-    </div>  
-    <div class="image-container" data-src="A11.jpg">  
-        <img src="A11.jpg" alt="Day11">  
-    </div>  
-     <div class="image-container" data-src="A12.jpg">
-            <img src="A12.jpg" alt="Day12">
-        </div>
-        <div class="image-container" data-src="A13.jpg">
-            <img src="A13.jpg" alt="Day13">
-        </div>
-        <div class="image-container" data-src="A14.jpg">
-            <img src="A14.jpg" alt="Day14">
-        </div>
-        <div class="image-container" data-src="A15.jpg">
-            <img src="A15.jpg" alt="Day15">
-        </div>
-        <div class="image-container" data-src="A16.jpg">
-            <img src="A16.jpg" alt="Day16">
-        </div>
-        <div class="image-container" data-src="A17.jpg">
-            <img src="A17.jpg" alt="Day17">
-        </div>
-        <div class="image-container" data-src="A18.jpg">
-            <img src="A18.jpg" alt="Day18">
-        </div>
-        <div class="image-container" data-src="A19.jpg">
-            <img src="A19.jpg" alt="Day19">
-        </div>
-        <div class="image-container" data-src="A20.jpg">
-            <img src="A20.jpg" alt="Day20">
-        </div>
-        <div class="image-container" data-src="A21.jpg">
-            <img src="A21.jpg" alt="Day21">
-      
-        </div>
-        <div class="image-container" data-src="A22.jpg">
-            <img src="A22.jpg" alt="Day22">
-        </div>
-        <div class="image-container" data-src="A23.gif">
-            <img src="A23.gif" alt="Day23">
-        </div>
-        <div class="image-container" data-src="A24.gif">
-            <img src="A24.gif" alt="Day24">
-        </div>
-        <div class="image-container" data-src="A25.gif">
-            <img src="A25.gif" alt="Day25">
-        </div>
-        <div class="image-container" data-src="A26.jpg">
-            <img src="A26.jpg" alt="Day26">
-        </div>
-        <div class="image-container" data-src="A27.jpg">
-            <img src="A27.jpg" alt="Day27">
-        </div>
-        <div class="image-container" data-src="A28.gif">
-            <img src="A28.gif" alt="Day28">
-        </div>
-        <div class="image-container" data-src="A29.jpg">
-            <img src="A29.jpg" alt="Day29">
-        </div>
-          <div class="image-container" data-src="A30.gif">
-             <a href="https://aaaaaaajhsjsfwjgw.my.canva.site/cc03"> <img src="A30.gif" alt="Day30"></a>
-        </div>
-        
-     
-</div>
+  </header>
 
-<!-- Lightbox -->  
-<div id="lightbox" class="lightbox">  
-    <span class="close">&times;</span>  
-    <img class="lightbox-content" id="lightbox-img">  
-    <div class="caption"></div>  
-</div>  
-<div id="hearts"></div> 
-<footer>  
-    <p>All rights reserved by suraj kr 😅.</p>  
-</footer>
+  <div class="message-wrap">
+    <div id="love-message"></div>
+  </div>
 
+  <div class="controls">
+    <button class="btn" id="music-toggle">Play Music</button>
+    <button class="btn" id="new-message">New Message</button>
+  </div>
 
+  <main>
+    <section class="gallery" id="gallery"></section>
+  </main>
 
-    
+  <!-- Lightbox -->
+  <div id="lightbox" class="lightbox" aria-hidden="true">
+    <button class="close" id="close-lightbox" aria-label="Close lightbox">&times;</button>
+    <button class="nav-btn nav-prev" id="prev-btn" aria-label="Previous image">&#10094;</button>
 
-    
-     
+    <div class="lightbox-frame">
+      <img class="lightbox-content" id="lightbox-img" alt="Gallery preview" />
+    </div>
 
-<script src="backgroundcolor.js"></script>
-<script src="function createHeart.js"></script>     
-<script src="security.js"></script> 
-<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.0.0"></script>    
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script> 
-<script src="Lightbox functionality.js"></script> 
-<script src="audio.js"></script> 
-<script src="star-msg.js"></script> 
-<script src="p.message.js"></script> 
-<audio id="bg-music" loop>
-<source src="Aaa1.mp3" type="audio/mpeg">
-</audio> 
+    <button class="nav-btn nav-next" id="next-btn" aria-label="Next image">&#10095;</button>
+    <div class="caption" id="lightbox-caption"></div>
+  </div>
 
+  <div id="toast" class="toast"></div>
 
+  <footer>
+    <p>All rights reserved by Suraj KR 😅</p>
+  </footer>
 
-     <script>  
-document.addEventListener("click", function(event) {  
-    confetti({  
-        particleCount: 100,  
-        spread: 70,  
-        origin: { x: event.clientX / window.innerWidth, y: event.clientY / window.innerHeight }  
-    });  
-});  
-</script>
-    <script>
-    // List of emojis to show (change or add more)
-    const emojis = ["❤️", "💖", "💘", "😊", "😘", "💞", "🥰", "🌸"];
+  <audio id="bg-music" loop preload="auto">
+    <source src="Aaa1.mp3" type="audio/mpeg" />
+  </audio>
 
-    document.addEventListener("click", function(event) {
-        for (let i = 0; i < 3; i++) {  // Spawn 3 emojis per click
-            createEmoji(event.clientX, event.clientY);
+  <script>
+    // -----------------------------
+    // Data
+    // -----------------------------
+    const galleryItems = [
+      { src: "A1.jpg", alt: "Day 1" },
+      { src: "A2.jpg", alt: "Day 2" },
+      { src: "A3.jpg", alt: "Day 3" },
+      { src: "A4.jpg", alt: "Day 4" },
+      { src: "A5.jpg", alt: "Day 5" },
+      { src: "A6.jpg", alt: "Day 6" },
+      { src: "A7.jpg", alt: "Day 7" },
+      { src: "A8.jpg", alt: "Day 8" },
+      { src: "A9.jpg", alt: "Day 9" },
+      { src: "A10.jpg", alt: "Day 10" },
+      { src: "A11.jpg", alt: "Day 11" },
+      { src: "A12.jpg", alt: "Day 12" },
+      { src: "A13.jpg", alt: "Day 13" },
+      { src: "A14.jpg", alt: "Day 14" },
+      { src: "A15.jpg", alt: "Day 15" },
+      { src: "A16.jpg", alt: "Day 16" },
+      { src: "A17.jpg", alt: "Day 17" },
+      { src: "A18.jpg", alt: "Day 18" },
+      { src: "A19.jpg", alt: "Day 19" },
+      { src: "A20.jpg", alt: "Day 20" },
+      { src: "A21.jpg", alt: "Day 21" },
+      { src: "A22.jpg", alt: "Day 22" },
+      { src: "A23.gif", alt: "Day 23" },
+      { src: "A24.gif", alt: "Day 24" },
+      { src: "A25.gif", alt: "Day 25" },
+      { src: "A26.jpg", alt: "Day 26" },
+      { src: "A27.jpg", alt: "Day 27" },
+      { src: "A28.gif", alt: "Day 28" },
+      { src: "A29.jpg", alt: "Day 29" },
+      { src: "A30.gif", alt: "Day 30", href: "https://aaaaaaajhsjsfwjgw.my.canva.site/cc03" }
+    ];
+
+    const messages = [
+      "Ramadan is a time for peace, prayer, and gratitude. 🌙",
+      "May this month fill your home with blessings and calm. ✨",
+      "Let every fast bring patience, reflection, and hope. 🤲",
+      "Kindness, prayer, and gratitude make Ramadan beautiful. 💛",
+      "May your duas be heard and your heart feel light. 🌙",
+      "Wishing you a peaceful and meaningful Ramadan. 🕌",
+      "Every sunset in Ramadan brings mercy and gratitude. 🌅",
+      "May your days be blessed and your nights be full of prayer. ✨",
+      "Ramadan reminds us to grow in faith, kindness, and hope. 💫",
+      "May this sacred month bring joy, strength, and reflection. 🤍"
+    ];
+
+    const starMessages = [
+      "May your Ramadan be full of peace and blessings. ✨",
+      "Let your heart shine with kindness this month. 🌙",
+      "Every prayer adds light to the soul. 🤲",
+      "Gratitude turns simple moments into blessings. 💛",
+      "Faith grows stronger with patience and prayer. 🕌",
+      "May your nights be calm and your days meaningful. ✨"
+    ];
+
+    const emojis = ["❤️", "💖", "💘", "😊", "🥰", "🌸", "✨", "🌙"];
+    const bgColors = [
+      "linear-gradient(135deg, #111827, #1f2a44, #2e3b5e)",
+      "linear-gradient(135deg, #2b2d42, #1d3557, #3a506b)",
+      "linear-gradient(135deg, #1b4332, #2d6a4f, #1d3557)",
+      "linear-gradient(135deg, #2a2a72, #009ffd, #1f2a44)"
+    ];
+
+    // -----------------------------
+    // Helpers
+    // -----------------------------
+    function showToast(text) {
+      const toast = document.getElementById("toast");
+      toast.textContent = text;
+      toast.classList.add("show");
+      clearTimeout(showToast._timer);
+      showToast._timer = setTimeout(() => {
+        toast.classList.remove("show");
+      }, 1800);
+    }
+
+    function placeholderSVG(label) {
+      const safeLabel = encodeURIComponent(label);
+      return `data:image/svg+xml;charset=UTF-8,
+        <svg xmlns='http://www.w3.org/2000/svg' width='800' height='800' viewBox='0 0 800 800'>
+          <defs>
+            <linearGradient id='g' x1='0' y1='0' x2='1' y2='1'>
+              <stop offset='0%' stop-color='%231f2a44'/>
+              <stop offset='100%' stop-color='%232e3b5e'/>
+            </linearGradient>
+          </defs>
+          <rect width='800' height='800' fill='url(%23g)'/>
+          <text x='50%' y='45%' text-anchor='middle' fill='%23ffd700' font-size='90' font-family='Arial'>🌙</text>
+          <text x='50%' y='58%' text-anchor='middle' fill='white' font-size='34' font-family='Arial'>${safeLabel}</text>
+        </svg>`.replace(/\n/g, "");
+    }
+
+    function getRandom(arr) {
+      return arr[Math.floor(Math.random() * arr.length)];
+    }
+
+    // -----------------------------
+    // Build gallery
+    // -----------------------------
+    const gallery = document.getElementById("gallery");
+
+    galleryItems.forEach((item, index) => {
+      const card = document.createElement("div");
+      card.className = "image-container";
+      card.dataset.index = index;
+      card.dataset.src = item.src;
+      card.dataset.alt = item.alt;
+      if (item.href) card.dataset.href = item.href;
+
+      const img = document.createElement("img");
+      img.src = item.src;
+      img.alt = item.alt;
+      img.loading = "lazy";
+      img.onerror = function () {
+        this.src = placeholderSVG(item.alt);
+      };
+
+      const label = document.createElement("div");
+      label.className = "image-label";
+      label.textContent = item.alt;
+
+      card.appendChild(img);
+      card.appendChild(label);
+      gallery.appendChild(card);
+    });
+
+    // -----------------------------
+    // Loader
+    // -----------------------------
+    window.addEventListener("DOMContentLoaded", () => {
+      gsap.to(".loader-dot", {
+        y: -18,
+        stagger: 0.15,
+        repeat: -1,
+        yoyo: true,
+        duration: 0.55,
+        ease: "power2.inOut"
+      });
+
+      const progressBar = document.querySelector(".loader-progress-bar");
+      const messageElement = document.querySelector(".loader-message");
+      const loadingMessages = [
+        "Loading blessings...",
+        "Preparing gallery...",
+        "Adding stars...",
+        "Almost ready..."
+      ];
+
+      let progress = 0;
+      const interval = setInterval(() => {
+        progress += Math.random() * 14;
+        if (progress > 100) progress = 100;
+
+        gsap.to(progressBar, {
+          width: `${progress}%`,
+          duration: 0.35,
+          ease: "power2.out"
+        });
+
+        if (progress > 25 && progress <= 50) {
+          messageElement.textContent = loadingMessages[1];
+        } else if (progress > 50 && progress <= 75) {
+          messageElement.textContent = loadingMessages[2];
+        } else if (progress > 75) {
+          messageElement.textContent = loadingMessages[3];
         }
+
+        if (progress >= 100) {
+          clearInterval(interval);
+
+          gsap.to("#gsap-loader", {
+            opacity: 0,
+            duration: 0.8,
+            ease: "power2.inOut",
+            onComplete: () => {
+              const loader = document.getElementById("gsap-loader");
+              loader.style.display = "none";
+              document.body.classList.add("loaded");
+
+              gsap.fromTo(
+                "header, .message-wrap, .controls, .gallery, footer",
+                { y: 18, opacity: 0 },
+                {
+                  y: 0,
+                  opacity: 1,
+                  duration: 0.8,
+                  stagger: 0.08,
+                  ease: "power2.out"
+                }
+              );
+            }
+          });
+        }
+      }, 240);
+    });
+
+    // -----------------------------
+    // Message section
+    // -----------------------------
+    const messageBox = document.getElementById("love-message");
+    function setRandomMessage() {
+      messageBox.textContent = getRandom(messages);
+    }
+    setRandomMessage();
+
+    document.getElementById("new-message").addEventListener("click", () => {
+      setRandomMessage();
+      showToast("New message shown");
+    });
+
+    // -----------------------------
+    // Stars
+    // -----------------------------
+    function createStars() {
+      const container = document.getElementById("stars-container");
+      container.innerHTML = "";
+
+      const count = window.innerWidth < 600 ? 6 : 10;
+
+      for (let i = 0; i < count; i++) {
+        const star = document.createElement("div");
+        star.className = "star";
+        star.textContent = "⭐";
+        star.style.left = `${Math.random() * 92}%`;
+        star.style.top = `${Math.random() * 70}%`;
+        star.style.animationDelay = `${Math.random() * 1.5}s`;
+
+        star.addEventListener("click", (e) => {
+          e.stopPropagation();
+          showToast(getRandom(starMessages));
+        });
+
+        container.appendChild(star);
+      }
+    }
+
+    createStars();
+    window.addEventListener("resize", createStars);
+
+    // -----------------------------
+    // Lightbox
+    // -----------------------------
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImg = document.getElementById("lightbox-img");
+    const lightboxCaption = document.getElementById("lightbox-caption");
+    const closeBtn = document.getElementById("close-lightbox");
+    const prevBtn = document.getElementById("prev-btn");
+    const nextBtn = document.getElementById("next-btn");
+
+    let currentIndex = 0;
+
+    function openLightbox(index) {
+      currentIndex = index;
+      const item = galleryItems[currentIndex];
+      lightboxImg.src = item.src;
+      lightboxImg.alt = item.alt;
+      lightboxCaption.textContent = item.alt;
+      lightbox.classList.add("show");
+      lightbox.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove("show");
+      lightbox.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+    }
+
+    function showPrev() {
+      currentIndex = (currentIndex - 1 + galleryItems.length) % galleryItems.length;
+      openLightbox(currentIndex);
+    }
+
+    function showNext() {
+      currentIndex = (currentIndex + 1) % galleryItems.length;
+      openLightbox(currentIndex);
+    }
+
+    gallery.addEventListener("click", (e) => {
+      const card = e.target.closest(".image-container");
+      if (!card) return;
+
+      const index = Number(card.dataset.index);
+      const href = card.dataset.href;
+
+      if (href && e.target.tagName === "IMG" && e.ctrlKey) {
+        window.open(href, "_blank");
+        return;
+      }
+
+      openLightbox(index);
+    });
+
+    closeBtn.addEventListener("click", closeLightbox);
+    prevBtn.addEventListener("click", showPrev);
+    nextBtn.addEventListener("click", showNext);
+
+    lightbox.addEventListener("click", (e) => {
+      if (e.target === lightbox) closeLightbox();
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (!lightbox.classList.contains("show")) return;
+
+      if (e.key === "Escape") closeLightbox();
+      if (e.key === "ArrowLeft") showPrev();
+      if (e.key === "ArrowRight") showNext();
+    });
+
+    lightboxImg.onerror = function () {
+      this.src = placeholderSVG(galleryItems[currentIndex].alt);
+    };
+
+    // -----------------------------
+    // Music
+    // -----------------------------
+    const musicBtn = document.getElementById("music-toggle");
+    const bgMusic = document.getElementById("bg-music");
+    let isMusicPlaying = false;
+
+    musicBtn.addEventListener("click", async () => {
+      try {
+        if (!isMusicPlaying) {
+          bgMusic.volume = 0.5;
+          await bgMusic.play();
+          isMusicPlaying = true;
+          musicBtn.textContent = "Pause Music";
+          showToast("Music started");
+        } else {
+          bgMusic.pause();
+          isMusicPlaying = false;
+          musicBtn.textContent = "Play Music";
+          showToast("Music paused");
+        }
+      } catch (error) {
+        showToast("Music could not be played");
+        console.error(error);
+      }
+    });
+
+    // -----------------------------
+    // Click effects: confetti + emojis
+    // -----------------------------
+    document.addEventListener("click", (event) => {
+      const isButton = event.target.closest("button");
+      const isStar = event.target.closest(".star");
+      const isLightboxControl = event.target.closest(".nav-btn, .close");
+      const isGalleryCard = event.target.closest(".image-container");
+
+      if (isLightboxControl) return;
+
+      confetti({
+        particleCount: 50,
+        spread: 60,
+        origin: {
+          x: event.clientX / window.innerWidth,
+          y: event.clientY / window.innerHeight
+        }
+      });
+
+      const burstCount = isButton || isStar || isGalleryCard ? 4 : 2;
+      for (let i = 0; i < burstCount; i++) {
+        createEmoji(event.clientX, event.clientY);
+      }
     });
 
     function createEmoji(x, y) {
-        const emoji = document.createElement("div");
-        emoji.classList.add("emoji");
-        emoji.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
-        
-        // Set emoji position near the click
-        emoji.style.left = (x + Math.random() * 30 - 15) + "px"; 
-        emoji.style.top = (y + Math.random() * 30 - 15) + "px"; 
-        
-        // Randomize animation duration slightly
-        emoji.style.animationDuration = (1.5 + Math.random() * 1.5) + "s"; 
-        
-        document.body.appendChild(emoji);
-
-        // Remove emoji after animation
-        setTimeout(() => { emoji.remove(); }, 2000);
+      const emoji = document.createElement("div");
+      emoji.className = "emoji";
+      emoji.textContent = getRandom(emojis);
+      emoji.style.left = `${x + Math.random() * 30 - 15}px`;
+      emoji.style.top = `${y + Math.random() * 20 - 10}px`;
+      emoji.style.animationDuration = `${1.2 + Math.random() * 0.8}s`;
+      document.body.appendChild(emoji);
+      setTimeout(() => emoji.remove(), 1900);
     }
-             </script>
 
+    // -----------------------------
+    // Floating hearts
+    // -----------------------------
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.textContent = "❤️";
+      heart.style.left = `${Math.random() * 100}vw`;
+      heart.style.fontSize = `${18 + Math.random() * 14}px`;
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 3000);
+    }
 
+    setInterval(createHeart, 700);
 
-
-
-
-
-</body></html>
+    // -----------------------------
+    // Background color rotation
+    // -----------------------------
+    let bgIndex = 0;
+    setInterval(() => {
+      bgIndex = (bgIndex + 1) % bgColors.length;
+      document.body.style.background = bgColors[bgIndex];
+    }, 4000);
+  </script>
+</body>
+</html>
